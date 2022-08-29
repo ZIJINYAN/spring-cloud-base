@@ -20,4 +20,5 @@ public class GoodsTypeEntity {
      * 商品类型名称
      */
     private String goodsTypeName;
+
 }

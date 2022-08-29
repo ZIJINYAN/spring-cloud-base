@@ -3,5 +3,38 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zj.system.mapper.GoodsMapper">
+    <resultMap id="GOODS_ALL" type="com.zj.system.common.domain.model.GoodsItemVo">
+        <association property="goodsEntity">
+            <id column="goods_id" property="goodsId"/>
+            <result column="goods_code" property="goodsCode"/>
+            <result column="goods_name" property="goodsName"/>
+            <result column="goods_type" property="goodsType"/>
+            <result column="goods_price" property="goodsPrice"/>
+            <result column="goods_desc" property="goodsDesc"/>
+            <result column="goods_sales" property="goodsSales"/>
+            <result column="goods_status" property="goodsStatus"/>
+        </association>
+        <association property="goodsTypeEntity">
+            <id column="goods_type_id" property="goodsTypeId"/>
+            <result column="goods_type_name" property="goodsTypeName"/>
+        </association>
+    </resultMap>
 
+    <select id="goodsList" resultMap="GOODS_ALL">
+        SELECT
+            *
+        FROM
+            system_goods AS sg
+                LEFT JOIN system_goods_type AS sgt ON sg.goods_type = sgt.goods_type_id
+        <where>
+            <if test="goodsEntity!=null">
+                <if test="goodsEntity.goodsName!=null and goodsEntity.goodsName!=''">
+                    and goods_name like concat('%',#{goodsEntity.goodsName},'%')
+                </if>
+                <if test="goodsEntity.goodsType!=null and goodsEntity.goodsType!=''">
+                    and goods_type = #{goodsEntity.goodsType}
+                </if>
+            </if>
+        </where>
+    </select>
 </mapper>

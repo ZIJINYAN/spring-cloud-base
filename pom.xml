@@ -69,6 +69,11 @@
                 <artifactId>mybatis-plus</artifactId>
                 <version>3.5.2</version>
             </dependency>
+            <dependency>
+                <groupId>com.github.yulichang</groupId>
+                <artifactId>mybatis-plus-join</artifactId>
+                <version>1.2.4</version>
+            </dependency>
             <!-- Alibaba Nacos 配置 -->
             <dependency>
                 <groupId>com.alibaba.nacos</groupId>

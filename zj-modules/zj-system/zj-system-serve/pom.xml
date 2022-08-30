@@ -17,6 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+        <!--    common依赖    -->
         <dependency>
             <groupId>com.zj</groupId>
             <artifactId>zj-common-log</artifactId>
@@ -24,6 +25,10 @@
         <dependency>
             <groupId>com.zj</groupId>
             <artifactId>zj-system-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.zj</groupId>
+            <artifactId>zj-common-redisson</artifactId>
         </dependency>
         <!-- SpringBoot Web-->
         <dependency>

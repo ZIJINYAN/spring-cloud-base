@@ -5,10 +5,7 @@ import com.zj.system.common.domain.vo.GoodsItemVo;
 import com.zj.system.common.domain.request.GoodsSearchVo;
 import com.zj.system.service.IGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +23,10 @@ public class GoodsController {
     @PostMapping("/list")
     public Result<List<GoodsItemVo>> goodsList(@RequestBody GoodsSearchVo goodsSearchVo){
         return Result.success(goodsService.goodsList(goodsSearchVo),"成功");
+    }
+
+    @PostMapping("/addCart/{goodsId}")
+    public Result<?> addCart(@PathVariable("goodsId")Integer goodsId){
+        return Result.success();
     }
 }

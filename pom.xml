@@ -25,6 +25,7 @@
         <module>zj-modules/zj-coupon/zj-coupon-common</module>
         <module>zj-modules/zj-coupon/zj-coupon-serve</module>
         <module>zj-modules/zj-coupon/zj-coupon-remote</module>
+        <module>zj-common/zj-common-redisson</module>
     </modules>
 
     <properties>
@@ -86,7 +87,7 @@
                 <artifactId>hutool-all</artifactId>
                 <version>5.5.8</version>
             </dependency>
-            <!-- Hutool工具包 -->
+            <!--   common    -->
             <dependency>
                 <groupId>com.zj</groupId>
                 <artifactId>zj-common-core</artifactId>
@@ -100,6 +101,11 @@
             <dependency>
                 <groupId>com.zj</groupId>
                 <artifactId>zj-common-log</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zj</groupId>
+                <artifactId>zj-common-redisson</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>

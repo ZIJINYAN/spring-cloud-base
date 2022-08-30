@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.zj.common.redisson.config.RedissonConfig,\
+  com.zj.common.redisson.instance.RedissonInstance,\
+  com.zj.common.redisson.service.impl.RedissonServiceImpl

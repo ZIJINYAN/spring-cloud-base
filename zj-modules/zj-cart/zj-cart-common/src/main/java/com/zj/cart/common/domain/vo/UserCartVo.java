@@ -1,6 +1,5 @@
 package com.zj.cart.common.domain.vo;
 
-import com.zj.cart.common.domain.CartGoodsEntity;
 import com.zj.cart.common.domain.UserCartEntity;
 import lombok.Data;
 
@@ -12,9 +11,13 @@ import java.util.List;
  */
 @Data
 public class UserCartVo {
-
-    private List<CartGoodsEntity> cartGoodsEntityList;
-
+    /**
+     * 购物车商品信息
+     */
+    private List<CartGoodsItemVo> cartGoodsItemVoList;
+    /**
+     * 购物车信息
+     */
     private UserCartEntity userCartEntity;
 
 }

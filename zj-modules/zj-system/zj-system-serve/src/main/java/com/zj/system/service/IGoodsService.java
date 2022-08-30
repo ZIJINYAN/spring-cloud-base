@@ -2,7 +2,7 @@ package com.zj.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zj.system.common.domain.GoodsEntity;
-import com.zj.system.common.domain.model.GoodsItemVo;
+import com.zj.system.common.domain.vo.GoodsItemVo;
 import com.zj.system.common.domain.request.GoodsSearchVo;
 
 import java.util.List;

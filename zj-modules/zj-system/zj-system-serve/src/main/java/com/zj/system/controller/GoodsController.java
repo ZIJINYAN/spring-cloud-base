@@ -1,7 +1,7 @@
 package com.zj.system.controller;
 
 import com.zj.common.core.domain.Result;
-import com.zj.system.common.domain.model.GoodsItemVo;
+import com.zj.system.common.domain.vo.GoodsItemVo;
 import com.zj.system.common.domain.request.GoodsSearchVo;
 import com.zj.system.service.IGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.zj.system.common.domain.model;
+package com.zj.system.common.domain.vo;
 
 import com.zj.system.common.domain.GoodsEntity;
 import com.zj.system.common.domain.GoodsTypeEntity;

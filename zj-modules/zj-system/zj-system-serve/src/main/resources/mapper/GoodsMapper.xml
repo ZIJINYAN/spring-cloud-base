@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zj.system.mapper.GoodsMapper">
-    <resultMap id="GOODS_ALL" type="com.zj.system.common.domain.model.GoodsItemVo">
+    <resultMap id="GOODS_ALL" type="com.zj.system.common.domain.vo.GoodsItemVo">
         <association property="goodsEntity">
             <id column="goods_id" property="goodsId"/>
             <result column="goods_code" property="goodsCode"/>

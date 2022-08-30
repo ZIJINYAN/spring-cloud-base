@@ -2,7 +2,7 @@ package com.zj.system.mapper;
 
 import com.github.yulichang.base.MPJBaseMapper;
 import com.zj.system.common.domain.GoodsEntity;
-import com.zj.system.common.domain.model.GoodsItemVo;
+import com.zj.system.common.domain.vo.GoodsItemVo;
 import com.zj.system.common.domain.request.GoodsSearchVo;
 
 import java.util.List;

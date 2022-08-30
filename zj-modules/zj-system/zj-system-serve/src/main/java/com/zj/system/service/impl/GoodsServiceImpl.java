@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zj.system.common.domain.GoodsEntity;
-import com.zj.system.common.domain.model.GoodsItemVo;
+import com.zj.system.common.domain.vo.GoodsItemVo;
 import com.zj.system.common.domain.request.GoodsSearchVo;
 import com.zj.system.mapper.GoodsMapper;
 import com.zj.system.service.IGoodsService;

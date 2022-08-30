@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.zj.common.security.handler.GlobalExceptionHandler
+    com.zj.common.security.config.WebMvcConfig,\
+    com.zj.common.security.handler.GlobalExceptionHandler

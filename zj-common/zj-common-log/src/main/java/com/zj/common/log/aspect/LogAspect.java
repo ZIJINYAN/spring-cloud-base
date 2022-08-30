@@ -6,6 +6,7 @@ import com.zj.common.core.utils.StringUtils;
 import com.zj.common.core.utils.ip.IpUtils;
 import com.zj.common.log.annotation.Log;
 import com.zj.common.log.enums.BusinessStatus;
+import com.zj.common.security.utils.SecurityUtils;
 import com.zj.system.common.domain.SysOperLog;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -34,7 +35,6 @@ import java.util.Map;
 public class LogAspect
 {
     private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
-
     /**
      * 处理完请求后执行
      *
@@ -66,11 +66,11 @@ public class LogAspect
             String ip = IpUtils.getIpAddr(ServletUtils.getRequest());
             operLog.setOperIp(ip);
             operLog.setOperUrl(ServletUtils.getRequest().getRequestURI());
-//            String username = SecurityUtils.getUsername();
-//            if (StringUtils.isNotBlank(username))
-//            {
-//                operLog.setOperName(username);
-//            }
+            String username = SecurityUtils.getUsername();
+            if (StringUtils.isNotBlank(username))
+            {
+                operLog.setOperName(username);
+            }
             if (e != null)
             {
                 operLog.setStatus(BusinessStatus.FAIL.ordinal());

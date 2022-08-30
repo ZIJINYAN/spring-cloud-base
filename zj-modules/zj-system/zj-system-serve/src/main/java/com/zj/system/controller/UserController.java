@@ -22,7 +22,6 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-
     @Log(title = "用户登录", businessType = BusinessType.OTHER)
     @PostMapping("/login")
     public Result<UserEntity> login(@RequestBody UserEntity userLogin){

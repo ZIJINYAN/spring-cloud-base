@@ -27,4 +27,9 @@ public enum BusinessType
      */
     DELETE,
 
+    /**
+     * 查询
+     */
+    SELECT
+
 }

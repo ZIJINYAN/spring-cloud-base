@@ -7,6 +7,7 @@ import com.zj.common.core.constants.JwtConstants;
 import com.zj.common.core.constants.TokenConstants;
 import com.zj.common.core.domain.Result;
 import com.zj.common.core.utils.JwtUtils;
+import com.zj.common.log.annotation.Log;
 import com.zj.system.common.domain.UserEntity;
 import com.zj.system.common.domain.response.JwtResponse;
 import com.zj.system.remote.UserServiceRemote;
@@ -37,8 +38,9 @@ public class UserController {
         String userKey = IdUtil.fastSimpleUUID();
         redisTemplate.opsForValue().set(TokenConstants.LOGIN_TOKEN_KEY+userKey, JSON.toJSONString(user));
         Map<String,Object> map = new HashMap<>();
-        map.put(JwtConstants.USER_KEY, userKey);
         map.put(JwtConstants.DETAILS_USER_ID,user.getUserId());
+        map.put(JwtConstants.USER_KEY, userKey);
+        map.put(JwtConstants.DETAILS_USERNAME, user.getUsername());
         String token = JwtUtils.createToken(map);
         JwtResponse jwtResponse = new JwtResponse();
         jwtResponse.setToken(token);
@@ -46,6 +48,7 @@ public class UserController {
     }
 
     @GetMapping("/info")
+    @Log(title = "获取用户信息")
     public Result<UserEntity> info(@RequestParam("token")String token){
         String userKey = JwtUtils.getUserKey(token);
         UserEntity user = JSONObject.parseObject(

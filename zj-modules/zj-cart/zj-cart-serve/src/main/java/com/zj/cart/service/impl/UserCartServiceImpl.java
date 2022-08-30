@@ -10,6 +10,7 @@ import com.zj.cart.common.domain.vo.UserCartVo;
 import com.zj.cart.mapper.UserCartMapper;
 import com.zj.cart.service.ICartGoodsService;
 import com.zj.cart.service.IUserCartService;
+import com.zj.common.security.utils.SecurityUtils;
 import com.zj.system.common.domain.vo.GoodsItemVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -38,7 +39,7 @@ public class UserCartServiceImpl extends ServiceImpl<UserCartMapper, UserCartEnt
         UserCartVo userCartVo = new UserCartVo();
         UserCartEntity userCartInfo = this.getBaseMapper().selectOne(
                 new QueryWrapper<UserCartEntity>().lambda()
-                        .eq(UserCartEntity::getUserId, 1) // 存储登录用户信息 transmittable-thread-local
+                        .eq(UserCartEntity::getUserId, SecurityUtils.getUserId()) // 存储登录用户信息 transmittable-thread-local
         );
         List<CartGoodsEntity> cartGoodsItemList = cartGoodsService.getBaseMapper().selectList(
                 new QueryWrapper<CartGoodsEntity>().lambda()

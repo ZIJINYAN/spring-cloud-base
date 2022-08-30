@@ -27,6 +27,7 @@ public class JwtUtils {
      * @return 数据声明
      */
     public static Claims parseToken(String token){
+        System.out.println(token);
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     }
     /**

@@ -1,6 +1,7 @@
 package com.zj.system.controller;
 
 import com.zj.common.core.domain.Result;
+import com.zj.common.log.annotation.Log;
 import com.zj.system.common.domain.vo.GoodsItemVo;
 import com.zj.system.common.domain.request.GoodsSearchVo;
 import com.zj.system.service.IGoodsService;
@@ -20,6 +21,7 @@ public class GoodsController {
     @Autowired
     private IGoodsService goodsService;
 
+    @Log(title = "商品列表")
     @PostMapping("/list")
     public Result<List<GoodsItemVo>> goodsList(@RequestBody GoodsSearchVo goodsSearchVo){
         return Result.success(goodsService.goodsList(goodsSearchVo),"成功");

@@ -3,7 +3,7 @@ package com.zj.common.core.utils.file;
 /**
  * 媒体类型工具类
  *
- * @author bawei
+ * @author zj
  */
 public class MimeTypeUtils
 {

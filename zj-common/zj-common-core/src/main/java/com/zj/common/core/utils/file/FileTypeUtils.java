@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * 文件类型工具类
  *
- * @author bawei
+ * @author zj
  */
 public class FileTypeUtils
 {

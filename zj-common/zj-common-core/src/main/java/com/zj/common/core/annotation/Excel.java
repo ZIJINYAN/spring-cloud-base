@@ -1,6 +1,6 @@
 package com.zj.common.core.annotation;
 
-import com.bawei.common.core.utils.poi.ExcelHandlerAdapter;
+import com.zj.common.core.utils.poi.ExcelHandlerAdapter;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 
@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 /**
  * 自定义导出Excel数据注解
  * 
- * @author bawei
+ * @author zj
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

@@ -75,5 +75,18 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, CouponEntity> i
         }
     }
 
+    @Override
+    public void importCoupon(List<CouponEntity> couponEntityList) {
+        couponEntityList.stream().forEach(item->{
+            CouponEntity coupon = new CouponEntity();
+            coupon.setCouponName(item.getCouponName());
+            coupon.setCouponFull(item.getCouponFull());
+            coupon.setCouponReduce(item.getCouponReduce());
+            coupon.setCouponNum(item.getCouponNum());
+            this.save(coupon);
+
+        });
+    }
+
 
 }

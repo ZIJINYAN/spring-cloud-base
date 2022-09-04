@@ -13,7 +13,7 @@ import java.util.Arrays;
 /**
  * 图片处理工具类
  *
- * @author bawei
+ * @author zj
  */
 public class ImageUtils
 {

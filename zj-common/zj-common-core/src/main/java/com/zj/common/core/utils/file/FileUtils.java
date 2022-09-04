@@ -1,6 +1,6 @@
 package com.zj.common.core.utils.file;
 
-import com.bawei.common.core.utils.StringUtils;
+import com.zj.common.core.utils.StringUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * 文件处理工具类
  * 
- * @author bawei
+ * @author zj
  */
 public class FileUtils
 {

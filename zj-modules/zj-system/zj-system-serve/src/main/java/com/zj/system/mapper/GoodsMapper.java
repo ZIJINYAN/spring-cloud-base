@@ -2,10 +2,6 @@ package com.zj.system.mapper;
 
 import com.github.yulichang.base.MPJBaseMapper;
 import com.zj.system.common.domain.GoodsEntity;
-import com.zj.system.common.domain.vo.GoodsItemVo;
-import com.zj.system.common.domain.request.GoodsSearchVo;
-
-import java.util.List;
 
 /**
  * @author zj
@@ -13,5 +9,5 @@ import java.util.List;
  */
 
 public interface GoodsMapper extends MPJBaseMapper<GoodsEntity> {
-    List<GoodsItemVo> goodsList(GoodsSearchVo goodsSearchVo);
+
 }

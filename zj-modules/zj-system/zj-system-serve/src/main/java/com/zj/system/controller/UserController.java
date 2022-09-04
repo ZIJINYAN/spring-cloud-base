@@ -1,8 +1,6 @@
 package com.zj.system.controller;
 
 import com.zj.common.core.domain.Result;
-import com.zj.common.log.annotation.Log;
-import com.zj.common.log.enums.BusinessType;
 import com.zj.system.common.domain.UserEntity;
 import com.zj.system.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +20,15 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    @Log(title = "用户登录", businessType = BusinessType.OTHER)
     @PostMapping("/login")
-    public Result<UserEntity> login(@RequestBody UserEntity userLogin){
-        return userService.login(userLogin);
+    public Result<UserEntity> userLogin(@RequestBody UserEntity userLogin){
+        return Result.success(userService.userLogin(userLogin),"成功");
+    }
+
+    @PostMapping("/subscription")
+    public Result<?> subscription(){
+        userService.subscription();
+        return Result.success(null,"成功");
     }
 
 }

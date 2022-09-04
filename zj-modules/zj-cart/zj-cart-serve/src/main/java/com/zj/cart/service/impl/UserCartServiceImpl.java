@@ -1,24 +1,19 @@
 package com.zj.cart.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zj.cart.common.domain.CartGoodsEntity;
 import com.zj.cart.common.domain.UserCartEntity;
-import com.zj.cart.common.domain.vo.CartGoodsItemVo;
-import com.zj.cart.common.domain.vo.UserCartVo;
+import com.zj.cart.common.vo.CartItemVo;
 import com.zj.cart.mapper.UserCartMapper;
 import com.zj.cart.service.ICartGoodsService;
 import com.zj.cart.service.IUserCartService;
 import com.zj.common.security.utils.SecurityUtils;
-import com.zj.system.common.domain.vo.GoodsItemVo;
+import com.zj.system.common.vo.GoodsItemVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author zj
@@ -34,30 +29,34 @@ public class UserCartServiceImpl extends ServiceImpl<UserCartMapper, UserCartEnt
     private StringRedisTemplate redisTemplate;
 
     @Override
-    public UserCartVo cartInfo() {
+    public void addCart(GoodsItemVo goodsItemVo) {
+        BoundHashOperations<String, Object, Object> boundHashOps = redisTemplate.boundHashOps("user_cart_" + SecurityUtils.getUserId());
+        String goodsId = goodsItemVo.getGoodsId().toString();
+        if(boundHashOps.hasKey(goodsId)){
+            CartItemVo cartItemVo = JSONObject.parseObject(boundHashOps.get(goodsId).toString(), CartItemVo.class);
+            cartItemVo.setGoodsNum(cartItemVo.getGoodsNum() + 1);
+            boundHashOps.put(goodsId, JSON.toJSONString(cartItemVo));
+        } else {
+            CartItemVo cartItemVo = new CartItemVo();
+            cartItemVo.setGoodsTypeId(goodsItemVo.getGoodsTypeId());
+            cartItemVo.setGoodsTypeName(goodsItemVo.getGoodsTypeName());
+            cartItemVo.setGoodsId(goodsItemVo.getGoodsId());
+            cartItemVo.setGoodsCode(goodsItemVo.getGoodsCode());
+            cartItemVo.setGoodsName(goodsItemVo.getGoodsName());
+            cartItemVo.setGoodsPrice(goodsItemVo.getGoodsPrice());
+            cartItemVo.setGoodsDesc(goodsItemVo.getGoodsDesc());
+            cartItemVo.setGoodsSales(goodsItemVo.getGoodsSales());
+            cartItemVo.setGoodsStatus(goodsItemVo.getGoodsStatus());
+            cartItemVo.setGoodsNum(1);
+            boundHashOps.put(goodsId, JSON.toJSONString(cartItemVo));
+        }
+    }
 
-        UserCartVo userCartVo = new UserCartVo();
-        UserCartEntity userCartInfo = this.getBaseMapper().selectOne(
-                new QueryWrapper<UserCartEntity>().lambda()
-                        .eq(UserCartEntity::getUserId, SecurityUtils.getUserId()) // 存储登录用户信息 transmittable-thread-local
-        );
-        List<CartGoodsEntity> cartGoodsItemList = cartGoodsService.getBaseMapper().selectList(
-                new QueryWrapper<CartGoodsEntity>().lambda()
-                        .eq(CartGoodsEntity::getCartId, userCartInfo.getCartId())
-        );
-        Map<Object, Object> goodsAll = redisTemplate.boundHashOps("goods_all").entries();
-        List<CartGoodsItemVo> cartGoodsItemVoList = cartGoodsItemList.stream().map(cartGoodsItem -> {
-            GoodsItemVo goodsItemVo = JSONObject.parseObject(goodsAll.get(cartGoodsItem.getGoodsId().toString()).toString(), GoodsItemVo.class);
-            CartGoodsItemVo cartGoodsItemVo = new CartGoodsItemVo();
-            cartGoodsItemVo.setCartGoodsEntity(cartGoodsItem);
-            cartGoodsItemVo.setGoodsCode(goodsItemVo.getGoodsEntity().getGoodsCode());
-            cartGoodsItemVo.setGoodsName(goodsItemVo.getGoodsEntity().getGoodsName());
-            cartGoodsItemVo.setGoodsPrice(goodsItemVo.getGoodsEntity().getGoodsPrice());
-            cartGoodsItemVo.setCartGoodsEntity(cartGoodsItem);
-            return cartGoodsItemVo;
-        }).collect(Collectors.toList());
-        userCartVo.setUserCartEntity(userCartInfo);
-        userCartVo.setCartGoodsItemVoList(cartGoodsItemVoList);
-        return userCartVo;
+    @Override
+    public void removeCartGoodsItem(String goodsId) {
+        BoundHashOperations<String, Object, Object> boundHashOps = redisTemplate.boundHashOps("user_cart_" + SecurityUtils.getUserId());
+        if(boundHashOps.hasKey(goodsId)){
+            boundHashOps.delete(goodsId);
+        }
     }
 }

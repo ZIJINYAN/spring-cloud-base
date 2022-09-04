@@ -2,7 +2,7 @@ package com.zj.cart.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zj.cart.common.domain.UserCartEntity;
-import com.zj.cart.common.domain.vo.UserCartVo;
+import com.zj.system.common.vo.GoodsItemVo;
 
 /**
  * @author zj
@@ -10,5 +10,8 @@ import com.zj.cart.common.domain.vo.UserCartVo;
  */
 public interface IUserCartService extends IService<UserCartEntity> {
 
-    UserCartVo cartInfo();
+
+    void addCart(GoodsItemVo goodsItemVo);
+
+    void removeCartGoodsItem(String goodsId);
 }

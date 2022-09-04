@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * 时间工具类
  *
- * @author zj
+ * @author bawei
  */
 public class DateUtils extends org.apache.commons.lang3.time.DateUtils
 {

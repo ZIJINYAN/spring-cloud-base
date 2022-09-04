@@ -1,9 +1,11 @@
 package com.zj.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zj.common.core.domain.PageResult;
+import com.zj.common.core.domain.Result;
 import com.zj.system.common.domain.GoodsEntity;
-import com.zj.system.common.domain.vo.GoodsItemVo;
-import com.zj.system.common.domain.request.GoodsSearchVo;
+import com.zj.system.common.request.GoodsRequest;
+import com.zj.system.common.vo.GoodsItemVo;
 
 import java.util.List;
 
@@ -13,5 +15,11 @@ import java.util.List;
  */
 public interface IGoodsService extends IService<GoodsEntity> {
 
-    List<GoodsItemVo> goodsList(GoodsSearchVo goodsSearchVo);
+
+    public List<GoodsItemVo> goodsList();
+
+    Result<PageResult<GoodsItemVo>> goodsEsList(GoodsRequest goodsRequest);
+
+    public void esSyncAll();
+
 }

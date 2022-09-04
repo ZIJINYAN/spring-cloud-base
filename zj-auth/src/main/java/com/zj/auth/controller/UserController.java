@@ -6,10 +6,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.zj.common.core.constants.JwtConstants;
 import com.zj.common.core.constants.TokenConstants;
 import com.zj.common.core.domain.Result;
+import com.zj.common.core.exception.BizException;
 import com.zj.common.core.utils.JwtUtils;
-import com.zj.common.log.annotation.Log;
+import com.zj.common.core.utils.StringUtils;
 import com.zj.system.common.domain.UserEntity;
-import com.zj.system.common.domain.response.JwtResponse;
+import com.zj.system.common.response.JwtResponse;
 import com.zj.system.remote.UserServiceRemote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -33,28 +34,34 @@ public class UserController {
     private StringRedisTemplate redisTemplate;
 
     @PostMapping("/login")
-    public Result<JwtResponse> login(@RequestBody UserEntity userLogin){
-        UserEntity user = userServiceRemote.login(userLogin).getData();
+    public Result<JwtResponse> userLogin(@RequestBody UserEntity userLogin){
+        UserEntity user = userServiceRemote.userLogin(userLogin).getData();
+        if(user == null){
+            throw new BizException(500,"用户名或者密码错误!");
+        }
         String userKey = IdUtil.fastSimpleUUID();
-        redisTemplate.opsForValue().set(TokenConstants.LOGIN_TOKEN_KEY+userKey, JSON.toJSONString(user));
         Map<String,Object> map = new HashMap<>();
-        map.put(JwtConstants.DETAILS_USER_ID,user.getUserId());
-        map.put(JwtConstants.USER_KEY, userKey);
+        map.put(JwtConstants.DETAILS_USER_ID, user.getUserId());
         map.put(JwtConstants.DETAILS_USERNAME, user.getUsername());
+        map.put(JwtConstants.USER_KEY, userKey);
         String token = JwtUtils.createToken(map);
+        redisTemplate.opsForValue().set(TokenConstants.LOGIN_TOKEN_KEY+userKey, JSON.toJSONString(user));
         JwtResponse jwtResponse = new JwtResponse();
         jwtResponse.setToken(token);
+        jwtResponse.setExpired("");
         return Result.success(jwtResponse);
     }
 
     @GetMapping("/info")
-    @Log(title = "获取用户信息")
-    public Result<UserEntity> info(@RequestParam("token")String token){
+    public Result<UserEntity> userInfo(@RequestParam("token")String token){
+        if(StringUtils.isEmpty(token)){
+            throw new BizException(500,"token获取失败!");
+        }
         String userKey = JwtUtils.getUserKey(token);
         UserEntity user = JSONObject.parseObject(
                 redisTemplate.opsForValue().get(TokenConstants.LOGIN_TOKEN_KEY + userKey),
                 UserEntity.class
         );
-        return Result.success(user);
+        return Result.success(user,"成功");
     }
 }

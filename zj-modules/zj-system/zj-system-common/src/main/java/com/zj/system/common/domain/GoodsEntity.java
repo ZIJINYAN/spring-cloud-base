@@ -1,5 +1,6 @@
 package com.zj.system.common.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -17,7 +18,7 @@ public class GoodsEntity {
     /**
      * 商品ID
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer goodsId;
     /**
      * 商品编号

@@ -20,6 +20,10 @@
     <dependencies>
         <dependency>
             <groupId>com.zj</groupId>
+            <artifactId>zj-common-redisson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.zj</groupId>
             <artifactId>zj-common-log</artifactId>
         </dependency>
         <dependency>

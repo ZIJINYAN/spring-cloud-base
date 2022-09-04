@@ -6,6 +6,8 @@ import com.zj.system.mapper.GoodsTypeMapper;
 import com.zj.system.service.IGoodsTypeService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 /**
  * @author zj
@@ -13,5 +15,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class GoodsTypeServiceImpl extends ServiceImpl<GoodsTypeMapper, GoodsTypeEntity> implements IGoodsTypeService {
+
+    @Override
+    public List<GoodsTypeEntity> goodsTypeList() {
+        return this.list();
+    }
 
 }

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 @FeignClient("ZJ-system")
 public interface UserServiceRemote {
-
     @PostMapping("/user/login")
-    public Result<UserEntity> login(@RequestBody UserEntity userLogin);
+    public Result<UserEntity> userLogin(@RequestBody UserEntity userLogin);
 }

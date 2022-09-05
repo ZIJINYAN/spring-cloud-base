@@ -42,7 +42,7 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, CouponEntity> i
         CouponEntity couponConfirm = null;
         synchronized (this) {
             //查询出已知通用的优惠劵
-            List<CouponEntity> couponList = this.list(null);
+            List<CouponEntity> couponList = this.list();
             //随机抽取一种类型的优惠劵 TODO 概率分布
             CouponEntity couponEntity = RandomUtil.randomEle(couponList);
             redissonService.defaultLock("random_coupon", couponEntity.getCouponId().toString());
